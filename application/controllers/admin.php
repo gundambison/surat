@@ -122,6 +122,8 @@ class Admin extends CI_Controller {
 		} else if ($mau_ke == "add") {
 			$a['page']		= "f_surat_masuk";
 		} else if ($mau_ke == "edt") {
+			$row= $this->db->query("SELECT count(*) total FROM t_surat_masuk WHERE id = '$idu'")->row();
+			if($row->total==0) die('no data on id='.$idu);
 			$a['datpil']	= $this->db->query("SELECT * FROM t_surat_masuk WHERE id = '$idu'")->row();	
 			$a['page']		= "f_surat_masuk";
 		} else if ($mau_ke == "act_add") {	
@@ -147,11 +149,10 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data telah diperbaharui. ".$this->upload->display_errors()."</div>");			
 			redirect('index.php/admin/surat_masuk');
 		} else {
-			$sql="SELECT * FROM t_surat_masuk s left join t_disposisi d 
-			on d.id_surat=s.id
-			WHERE 
-			YEAR(tgl_diterima) = '$ta' LIMIT $awal, $akhir ";
-			$a['data']		= $this->db->query($sql)->result();
+			$a['ta']		= $ta;
+			$a['awal']		= $awal;
+			$a['akhir']		= $akhir;
+			$a['data']		= array();//$this->db->query($sql)->result();
 			$a['page']		= "l_surat_masuk";
 		}
 		

@@ -1,35 +1,38 @@
-
-
 <?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 $mode		= $this->uri->segment(3);
+if (isset($datpil->id)){ 
+	if ($mode == "edt" || $mode == "act_edt") {
+		$act		= "act_edt";
+		$idp		= $datpil->id;
+		$no_agenda	= $datpil->no_agenda;
+		$indek_berkas= $datpil->indek_berkas;
+		$kode		= $datpil->kode;
+		$dari		= $datpil->dari;
+		$no_surat	= $datpil->no_surat;
+		$tgl_surat	= $datpil->tgl_surat;
+		$tgl_diterima	= $datpil->tgl_diterima;
 
-if ($mode == "edt" || $mode == "act_edt") {
-	$act		= "act_edt";
-	$idp		= $datpil->id;
-	$no_agenda	= $datpil->no_agenda;
-	$indek_berkas= $datpil->indek_berkas;
-	$kode		= $datpil->kode;
-	$dari		= $datpil->dari;
-	$no_surat	= $datpil->no_surat;
-	$tgl_surat	= $datpil->tgl_surat;
-	$tgl_diterima	= $datpil->tgl_diterima;
-
-	$uraian		= $datpil->isi_ringkas;
-	$ket		= $datpil->keterangan;
-	
-} else {
-	$act		= "act_add";
-	$idp		= "";
-	$no_agenda	= gli("t_surat_masuk", "no_agenda", 4);
-	$indek_berkas="";
-	$kode		= "";
-	$dari		= "";
-	$no_surat	= "";
-	$tgl_surat	= "";
-	$tgl_diterima = "";
-	$uraian		= "";
-	$ket		= "";
+		$uraian		= $datpil->isi_ringkas;
+		$ket		= $datpil->keterangan;
+		
+	} 
+	else {
+		$act		= "act_add";
+		$idp		= "";
+		$no_agenda	= gli("t_surat_masuk", "no_agenda", 4);
+		$indek_berkas="";
+		$kode		= "";
+		$dari		= "";
+		$no_surat	= "";
+		$tgl_surat	= "";
+		$tgl_diterima = "";
+		$uraian		= "";
+		$ket		= "";
+	}
 }
+else{}
 ?>
 <div class="navbar navbar-inverse">
 	<div class="container z0">
@@ -38,8 +41,8 @@ if ($mode == "edt" || $mode == "act_edt") {
 		</div>
 	</div><!-- /.container -->
 </div><!-- /.navbar -->
-
-	
+<?php 
+if (isset($datpil->id)){?>	
 	<form action="<?php echo base_URL(); ?>index.php/admin/surat_masuk/<?php echo $act; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	
 	<input type="hidden" name="idp" value="<?php echo $idp; ?>">
@@ -82,3 +85,9 @@ if ($mode == "edt" || $mode == "act_edt") {
 	</div>
 	
 	</form>
+<?php 
+}
+else{
+	echo 'NO   VALID DATA';
+}
+?>

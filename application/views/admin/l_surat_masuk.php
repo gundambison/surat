@@ -1,4 +1,14 @@
-<div class="clearfix">
+<?php 
+$sql="SELECT 
+s.*, kpd_yth, isi_disposisi, sifat, batas_waktu, catatan  
+FROM t_surat_masuk s left join t_disposisi d 
+			on d.id_surat=s.id
+			WHERE 
+			YEAR(tgl_diterima) = '$ta' 
+	LIMIT $awal, $akhir ";
+$data=$this->db->query($sql)->result();
+
+?><div class="clearfix">
 <div class="row">
   <div class="col-lg-12">
 	
@@ -58,7 +68,7 @@
 			echo "<tr><td colspan='5'  style='text-align: center; font-weight: bold'>--Data tidak ditemukan--</td></tr>";
 		} else {
 			$no 	= ($this->uri->segment(4) + 1);
-			foreach ($data as $b) { 
+			foreach ($data as $b) {  
 		?>
 		<tr>
 			<td><?php echo $b->no_agenda;?></td>
