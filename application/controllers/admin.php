@@ -111,6 +111,10 @@ class Admin extends CI_Controller {
 		
 
 		$this->load->library('upload', $config);
+		$a['ta']		= $ta;
+		$a['awal']		= $awal;
+		$a['akhir']		= $akhir;
+			
 		
 		if ($mau_ke == "del") {
 			$this->db->query("DELETE FROM t_surat_masuk WHERE id = '$idu'");
@@ -153,9 +157,7 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data telah diperbaharui. ".$this->upload->display_errors()."</div>");			
 			redirect('index.php/admin/surat_masuk');
 		} else {
-			$a['ta']		= $ta;
-			$a['awal']		= $awal;
-			$a['akhir']		= $akhir;
+			
 			$a['data']		= array();//$this->db->query($sql)->result();
 			$a['page']		= "l_surat_masuk";
 		}
