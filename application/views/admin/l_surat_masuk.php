@@ -58,7 +58,7 @@
 			echo "<tr><td colspan='5'  style='text-align: center; font-weight: bold'>--Data tidak ditemukan--</td></tr>";
 		} else {
 			$no 	= ($this->uri->segment(4) + 1);
-			foreach ($data as $b) {
+			foreach ($data as $b) { 
 		?>
 		<tr>
 			<td><?php echo $b->no_agenda;?></td>

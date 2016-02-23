@@ -147,7 +147,11 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data telah diperbaharui. ".$this->upload->display_errors()."</div>");			
 			redirect('index.php/admin/surat_masuk');
 		} else {
-			$a['data']		= $this->db->query("SELECT * FROM t_surat_masuk WHERE YEAR(tgl_diterima) = '$ta' LIMIT $awal, $akhir ")->result();
+			$sql="SELECT * FROM t_surat_masuk s left join t_disposisi d 
+			on d.id_surat=s.id
+			WHERE 
+			YEAR(tgl_diterima) = '$ta' LIMIT $awal, $akhir ";
+			$a['data']		= $this->db->query($sql)->result();
 			$a['page']		= "l_surat_masuk";
 		}
 		
@@ -162,7 +166,10 @@ class Admin extends CI_Controller {
 		$ta = $this->session->userdata('admin_ta');
 		
 		/* pagination */	
-		$total_row		= $this->db->query("SELECT * FROM t_surat_keluar WHERE YEAR(tgl_catat) = '$ta'")->num_rows();
+		$sql= "SELECT * FROM t_surat_keluar WHERE YEAR(tgl_catat) = '$ta'";
+		$total_row		= $this->db
+		->query($sql)
+		->num_rows();
 		$per_page		= 10;
 		
 		$awal	= $this->uri->segment(4); 
