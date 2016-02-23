@@ -1,4 +1,15 @@
 <?php 
+if(isset($cari)){
+	$sql="SELECT 
+	s.*, kpd_yth, isi_disposisi, sifat, batas_waktu, catatan  
+	FROM t_surat_masuk s left join t_disposisi d 
+			on d.id_surat=s.id
+	WHERE isi_ringkas LIKE '%$cari%' OR indek_berkas LIKE '%$cari%' OR dari LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR kode LIKE '%$cari%' OR no_agenda LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' ORDER BY id DESC";
+	$data=$this->db->query($sql)->result();
+}
+else{}
+
+if(count($data)==0){
 $sql="SELECT 
 s.*, kpd_yth, isi_disposisi, sifat, batas_waktu, catatan  
 FROM t_surat_masuk s left join t_disposisi d 
@@ -6,8 +17,9 @@ FROM t_surat_masuk s left join t_disposisi d
 			WHERE 
 			YEAR(tgl_diterima) = '$ta' 
 	LIMIT $awal, $akhir ";
-$data=$this->db->query($sql)->result();
-
+	$data=$this->db->query($sql)->result();
+}
+else{}
 ?><div class="clearfix">
 <div class="row">
   <div class="col-lg-12">

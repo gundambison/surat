@@ -117,7 +117,11 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata("k", "<div class=\"alert alert-success\" id=\"alert\">Data telah dihapus </div>");
 			redirect('index.php/admin/surat_masuk');
 		} else if ($mau_ke == "cari") {
-			$a['data']		= $this->db->query("SELECT * FROM t_surat_masuk WHERE isi_ringkas LIKE '%$cari%' OR indek_berkas LIKE '%$cari%' OR dari LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR kode LIKE '%$cari%' OR no_agenda LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' ORDER BY id DESC")->result();
+			$a['data']		= array();
+			/*
+			$this->db->query("SELECT * FROM t_surat_masuk WHERE isi_ringkas LIKE '%$cari%' OR indek_berkas LIKE '%$cari%' OR dari LIKE '%$cari%' OR no_surat LIKE '%$cari%' OR kode LIKE '%$cari%' OR no_agenda LIKE '%$cari%' OR tgl_surat LIKE '%$cari%' ORDER BY id DESC")->result();
+			*/
+			$a['cari']		= $cari;
 			$a['page']		= "l_surat_masuk";
 		} else if ($mau_ke == "add") {
 			$a['page']		= "f_surat_masuk";
