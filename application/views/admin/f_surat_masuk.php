@@ -32,7 +32,20 @@ if (isset($datpil->id)){
 		$ket		= "";
 	}
 }
-else{}
+else{
+	$act		= "act_add";
+		$idp		= "";
+		$no_agenda	= gli("t_surat_masuk", "no_agenda", 4);
+		$indek_berkas="";
+		$kode		= "";
+		$dari		= "";
+		$no_surat	= "";
+		$tgl_surat	= "";
+		$tgl_diterima = "";
+		$uraian		= "";
+		$ket		= "";
+	
+}
 ?>
 <div class="navbar navbar-inverse">
 	<div class="container z0">
@@ -42,7 +55,7 @@ else{}
 	</div><!-- /.container -->
 </div><!-- /.navbar -->
 <?php 
-if (isset($datpil->id)){?>	
+if (isset($datpil->id)||$mode !== "edt"){?>	
 	<form action="<?php echo base_URL(); ?>index.php/admin/surat_masuk/<?php echo $act; ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 	
 	<input type="hidden" name="idp" value="<?php echo $idp; ?>">
